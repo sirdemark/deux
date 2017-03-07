@@ -24,6 +24,9 @@ INVALID_MFA_CODE_ERROR = _("Please enter a valid code.")
 #: Error if an invalid phone number is entered.
 INVALID_PHONE_NUMBER_ERROR = _("Please enter a valid phone number.")
 
+#: Error if an invalid country number is entered.
+INVALID_COUNTRY_CODE_ERROR = _("Please enter a valid country code.")
+
 #: Error if phone number is not set for a challenge that requires it.
 PHONE_NUMBER_NOT_SET_ERROR = _(
     "MFA phone number must be set for this challenge.")

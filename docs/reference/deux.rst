@@ -19,7 +19,7 @@ GET /mfa/
         {
             "enabled": True or False,
             "challenge_type": "sms"
-            "phone_number": "14085862744"
+            "actual_number": "14085862744"
         }
 
 DELETE /mfa/
@@ -39,7 +39,7 @@ PUT /mfa/sms/request/
     .. code-block:: none
 
         {
-            "phone_number": "14085862744"
+            "actual_number": "14085862744"
         }
 
 **Expected Response**
@@ -50,7 +50,7 @@ PUT /mfa/sms/request/
         {
             "enabled":  False,
             "challenge_type": ""
-            "phone_number": "14085862744"
+            "actual_number": "14085862744"
         }
 
 PUT /mfa/sms/verify/
@@ -72,7 +72,7 @@ PUT /mfa/sms/verify/
         {
             "enabled":  True,
             "challenge_type": "sms"
-            "phone_number": "14085862744"
+            "actual_number": "14085862744"
         }
 
 GET /mfa/recovery/

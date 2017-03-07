@@ -9,7 +9,7 @@ from django.utils.crypto import constant_time_compare
 from deux.app_settings import mfa_settings
 from deux.constants import CHALLENGE_TYPES, DISABLED, SMS
 from deux.services import generate_key
-from deux.validators import phone_number_validator
+from deux.validators import phone_number_validator, country_code_validator
 
 
 class AbstractMultiFactorAuth(models.Model):
@@ -31,10 +31,22 @@ class AbstractMultiFactorAuth(models.Model):
         settings.AUTH_USER_MODEL, related_name="multi_factor_auth",
         primary_key=True)
 
+
+    phone_country_code = models.CharField(default='+1',
+        choices=(
+            ('+44', 'UK'),
+            ('+1', 'US'),
+            ('+506', 'Costa Rica'),
+        ),
+        max_length=5,
+        validators=[country_code_validator]
+    )
+
     #: User's phone number.
     phone_number = models.CharField(
         max_length=15, default="", blank=True,
         validators=[phone_number_validator])
+
 
     #: Challenge type used for MFA.
     challenge_type = models.CharField(
@@ -53,6 +65,10 @@ class AbstractMultiFactorAuth(models.Model):
         max_length=32, default=generate_key,
         help_text="Hex-Encoded Secret Key"
     )
+
+    @property
+    def full_number(self):
+        return self.phone_country_code + self.phone_number
 
     @property
     def sms_bin_key(self):

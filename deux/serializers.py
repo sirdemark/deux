@@ -35,6 +35,8 @@ class MultiFactorAuthSerializer(serializers.ModelSerializer):
             data["challenge_type"] = mfa_instance.challenge_type
         if mfa_instance.phone_number:
             data["phone_number"] = mfa_instance.phone_number
+        if mfa_instance.phone_country_code:
+            data["phone_country_code"] = mfa_instance.phone_country_code
         return data
 
     class Meta:
@@ -181,17 +183,21 @@ class SMSChallengeRequestSerializer(_BaseChallengeRequestSerializer):
         :param validated_data: Data returned by ``validate``.
         """
         mfa_instance.phone_number = validated_data["phone_number"]
+        mfa_instance.phone_country_code = validated_data["phone_country_code"]
         super(SMSChallengeRequestSerializer, self).update(
             mfa_instance, validated_data)
         mfa_instance.save()
         return mfa_instance
 
     class Meta(_BaseChallengeRequestSerializer.Meta):
-        fields = ("phone_number",)
+        fields = ("phone_number", "phone_country_code")
         extra_kwargs = {
             "phone_number": {
                 "required": True,
             },
+            "phone_country_code": {
+                "required": True
+            }
         }
 
 

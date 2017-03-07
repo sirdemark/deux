@@ -81,7 +81,7 @@ class SMSChallengeRequestViewTest(_BaseMFAViewTest):
     def test_already_enabled(self):
         resp = self.check_put_response(
             self.url, status.HTTP_400_BAD_REQUEST, user=self.user2,
-            data={"phone_number": self.phone_number})
+            data={"phone_number": self.phone_number, "phone_country_code": "+1"})
         self.assertEqual(resp.data, {"detail": [strings.ENABLED_ERROR]})
 
     def test_bad_phone_numbers(self):
@@ -89,13 +89,14 @@ class SMSChallengeRequestViewTest(_BaseMFAViewTest):
         resp = self.check_put_response(
             self.url, status.HTTP_400_BAD_REQUEST, user=self.user1)
         self.assertEqual(resp.data, {
-            "phone_number": ["This field is required."]
+            "phone_number": ["This field is required."],
+            "phone_country_code": ["This field is required."],
         })
 
         # Invalid phone number.
         resp = self.check_put_response(
             self.url, status.HTTP_400_BAD_REQUEST, user=self.user1,
-            data={"phone_number": "bad_number"})
+            data={"phone_number": "bad_number", "phone_country_code": "+1"})
         self.assertEqual(resp.data, {
             "phone_number": [strings.INVALID_PHONE_NUMBER_ERROR]
         })
@@ -106,7 +107,7 @@ class SMSChallengeRequestViewTest(_BaseMFAViewTest):
             FailedChallengeError("Error Message."))
         resp = self.check_put_response(
             self.url, status.HTTP_400_BAD_REQUEST, user=self.user1,
-            data={"phone_number": self.phone_number})
+            data={"phone_number": self.phone_number, "phone_country_code": "+1"})
         self.assertEqual(resp.data, {
             "detail": "Error Message."
         })
@@ -115,9 +116,9 @@ class SMSChallengeRequestViewTest(_BaseMFAViewTest):
     def test_success(self, challenge):
         resp = self.check_put_response(
             self.url, status.HTTP_200_OK, user=self.user1,
-            data={"phone_number": self.phone_number})
+            data={"phone_number": self.phone_number, "phone_country_code": "+1"})
         self.assertEqual(resp.data, {
-            "enabled": False, "phone_number": self.phone_number
+            "enabled": False, "phone_number": self.phone_number, "phone_country_code": "+1"
         })
         challenge.assert_called_once_with(self.mfa_1, SMS)
         challenge.return_value.generate_challenge.assert_called_once_with()

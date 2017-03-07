@@ -31,7 +31,7 @@ class SendMFACodeTextMessageTests(BaseUserTestCase):
         send_mfa_code_text_message(mfa_instance=self.mfa, mfa_code=self.code)
         twilio_client_instance.messages.create.assert_called_once_with(
             body="Two Factor Authentication Code: 123456",
-            to="1234567890",
+            to="+11234567890",
             from_="0987654321"
         )
 
