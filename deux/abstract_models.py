@@ -37,6 +37,7 @@ class AbstractMultiFactorAuth(models.Model):
             ('+44', 'UK'),
             ('+1', 'US'),
             ('+506', 'Costa Rica'),
+            ('+7', 'Russia'),
         ),
         max_length=5,
         validators=[country_code_validator]
