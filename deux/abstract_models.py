@@ -29,7 +29,7 @@ class AbstractMultiFactorAuth(models.Model):
     #: User this MFA object represents.
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, related_name="multi_factor_auth",
-        primary_key=True)
+        on_delete = models.CASCADE, primary_key=True)
 
 
     phone_country_code = models.CharField(default='+1',
