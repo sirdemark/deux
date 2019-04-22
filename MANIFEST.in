@@ -9,11 +9,10 @@ include tox.ini
 recursive-include docs *
 recursive-include extra/*
 recursive-include examples *
+recursive-include extra/*
 recursive-include requirements *.txt *.rst
 recursive-include test_proj *
 
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
 recursive-exclude * .*.sw[a-z]
-
-graft deux/locale
