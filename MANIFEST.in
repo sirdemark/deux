@@ -1,18 +1,4 @@
-include AUTHORS
-include Changelog
-include LICENSE
-include README.rst
-include MANIFEST.in
-include setup.cfg
-include setup.py
-include tox.ini
-recursive-include docs *
-recursive-include extra/*
-recursive-include examples *
-recursive-include extra/*
-recursive-include requirements *.txt *.rst
-recursive-include test_proj *
-
-recursive-exclude * __pycache__
-recursive-exclude * *.py[co]
-recursive-exclude * .*.sw[a-z]
+include deux/locale/en-us/LC_MESSAGES/*.po
+include deux/locale/zh_Hans/LC_MESSAGES/*.po
+include deux/locale/en-us/LC_MESSAGES/*.mo
+include deux/locale/zh_Hans/LC_MESSAGES/*.mo
