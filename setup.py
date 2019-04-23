@@ -131,7 +131,7 @@ setup(
     url=meta['homepage'],
     platforms=['any'],
     license='BSD',
-    packages=find_packages(exclude=['ez_setup', 'tests', 'tests.*'], include=['*']),
+    packages=find_packages(exclude=['ez_setup', 'tests', 'tests.*']),
     include_package_data=False,
     zip_safe=False,
     install_requires=reqs('default.txt'),
