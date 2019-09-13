@@ -3,4 +3,4 @@ include deux/locale/zh_Hans/LC_MESSAGES/*.po
 include deux/locale/en-us/LC_MESSAGES/*.mo
 include deux/locale/zh_Hans/LC_MESSAGES/*.mo
 include deux/locale/ko/LC_MESSAGES/*.mo
-include deux/locale/ko/LC_MESSAGES/*.mo
+include deux/locale/ko/LC_MESSAGES/*.po
