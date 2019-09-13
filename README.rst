@@ -106,3 +106,4 @@ You can install it by doing the following:
   :alt: Code Coverage
   :target: https://codecov.io/gh/robinhood/deux
 
+
