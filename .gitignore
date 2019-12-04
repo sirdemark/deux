@@ -31,3 +31,5 @@ coverage.*
 htmlcov/
 .vagrant/
 /test_proj/*
+/deuxenv/
+

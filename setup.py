@@ -19,7 +19,7 @@ setup(
         "django-oauth-toolkit>=0.10.0",
         "django-otp>=0.3.5",
         "six>=1.10.0",
-        "twilio>=5.4.0"
+        "twilio>=6.33.1"
     ],
     tests_require=[
         "mock==2.0.0",
