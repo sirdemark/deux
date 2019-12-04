@@ -1,7 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 
 from mock import Mock, patch
-from twilio.rest.exceptions import TwilioRestException
+from twilio.base.exceptions import TwilioRestException
 
 from deux.app_settings import mfa_settings
 from deux.exceptions import InvalidPhoneNumberError, TwilioMessageError
@@ -19,7 +19,7 @@ class SendMFACodeTextMessageTests(BaseUserTestCase):
         self.mfa.save()
         self.code = "123456"
 
-    @patch("deux.notifications.TwilioRestClient")
+    @patch("deux.notifications.Client")
     @patch("deux.notifications.mfa_settings")
     def test_success(self, mfa_settings, twilio_client):
         mfa_settings.TWILIO_ACCOUNT_SID = "sid"
@@ -35,7 +35,7 @@ class SendMFACodeTextMessageTests(BaseUserTestCase):
             from_="0987654321"
         )
 
-    @patch("deux.notifications.TwilioRestClient")
+    @patch("deux.notifications.Client")
     @patch("deux.notifications.mfa_settings")
     def test_invalid_number(self, mfa_settings, twilio_client):
         mfa_settings.TWILIO_ACCOUNT_SID = "sid"
@@ -51,7 +51,7 @@ class SendMFACodeTextMessageTests(BaseUserTestCase):
             send_mfa_code_text_message(
                 mfa_instance=self.mfa, mfa_code=self.code)
 
-    @patch("deux.notifications.TwilioRestClient")
+    @patch("deux.notifications.Client")
     @patch("deux.notifications.mfa_settings")
     def test_failed_sms_error(self, mfa_settings, twilio_client):
         mfa_settings.TWILIO_ACCOUNT_SID = "sid"
@@ -67,7 +67,7 @@ class SendMFACodeTextMessageTests(BaseUserTestCase):
             send_mfa_code_text_message(
                 mfa_instance=self.mfa, mfa_code=self.code)
 
-    @patch("deux.notifications.TwilioRestClient")
+    @patch("deux.notifications.Client")
     def test_no_twilio_credentials(self, twilio_client):
         twilio_client_instance = Mock()
         twilio_client.return_value = twilio_client_instance
